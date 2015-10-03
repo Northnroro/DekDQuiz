@@ -53,12 +53,12 @@ $('#q3').empty();
 $('#q3').append($("<span>"+q3q.split("{{$url}}")[0]+" </span>"));
 $('#q3').append($("<a style='color:red;' href='http://comic.naver.com/webtoon/detail.nhn?titleId=350217&no=31' target='_blank'><u>คลิกเพื่ออ่านการ์ตูน</u></a>"));
 $('#q3').append($("<span>"+q3q.split("{{$url}}")[1]+"</span>"));
-$('#q3').append($("<img src='http://9l.96.lt/dd/sad.png' style='display:none;'>"));
-$('#q3').append($("<img src='http://9l.96.lt/dd/ghost.png' style='display:none;'>"));
-$('#q3').append($("<img id='qfin' src='http://9l.96.lt/dd/hand.png' style='display:none;'>"));
+$('#q3').append($("<img src='http://s19.postimg.org/fc2bdqean/sad.png' style='display:none;'>"));
+$('#q3').append($("<img src='http://s19.postimg.org/4b768pm1r/ghost.png' style='display:none;'>"));
+$('#q3').append($("<img id='qfin' src='http://s19.postimg.org/o9n1b36qr/hand.png' style='display:none;'>"));
 
 $('[id^=a3_]').each(function(index){
-	this.innerHTML = "<img src='http://9l.96.lt/dd/smile.png'>";
+	this.innerHTML = "<img src='http://s19.postimg.org/7kllf6a5b/smile.png'>";
 	var deg = "rotate("+(parseInt(this.id.match(/\d+/g)[1])*40+115)+"deg)";
 	$(this).children().css({
 		"-webkit-transform": deg,
@@ -68,7 +68,7 @@ $('[id^=a3_]').each(function(index){
 });
 $('[id^=a3_]').parent().click(function(){
 	$('[id^=a3_]').each(function(){
-		this.innerHTML = "<img src='http://9l.96.lt/dd/sad.png'>";
+		this.innerHTML = "<img src='http://s19.postimg.org/fc2bdqean/sad.png'>";
 		var deg = "rotate("+(parseInt(this.id.match(/\d+/g)[1])*40+115)+"deg)";
 		$(this).children().css({
 			"-webkit-transform": deg,
@@ -104,7 +104,7 @@ $(document).scroll(function(){
 			}
 		},1200);
 		$('[id^=a3_]').each(function(){
-			this.innerHTML = "<img src='http://9l.96.lt/dd/ghost.png'>";
+			this.innerHTML = "<img src='http://s19.postimg.org/4b768pm1r/ghost.png'>";
 			var deg = "rotate("+(parseInt(this.id.match(/\d+/g)[1])*40+115)+"deg)";
 			$(this).children().css({
 				"-webkit-transform": deg,
