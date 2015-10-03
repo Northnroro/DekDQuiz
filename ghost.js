@@ -1,4 +1,4 @@
-﻿var q1answered = 0;
+var q1answered = 0;
 var q8answered = 0;
 $('[id^=a1_]').parent().click(function(){
 	q1answered = 1;
