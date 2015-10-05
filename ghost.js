@@ -40,6 +40,9 @@ $('[id^=a1_]').parent().click(function(){
 				$('#qfin').delay(1500);
 				$('#qfin').animate({top : "+=650px", opacity : 0}, 3000);
 				$('.submit_game').unbind('mouseover');
+				setTimeout(function() {
+					$('input[type="button"]').click();
+				},1000);
 			});
 		});
 	}
