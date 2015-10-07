@@ -6,12 +6,13 @@ $('.question').each(function(){
 	word = word.substring(1,word.length-1);
 	var resultspan = $("#"+$(this).find('span')[0].id+"r");
 	$('#'+$(this).find('span')[0].id+'t').change(function() {
-		console.log($(this).val() + "     " + word);
+		//console.log($(this).val() + "     " + word);
 		if($(this).val().length > 0) {
 			if($(this).val().indexOf(word) == 0) {
-				var compress = $(this).val().match(/[A-Za-z0-9ก-๙]*/g).join("");
-				console.log("regex : " + compress);
-				if(compress.length > 25) {
+				var compress = $(this).val().match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+				//console.log("regex : " + compress);
+				if(compress.length >= 25) {
+					resultspan.html("<span style='color:orange;'> (กำลังตรวจสอบ...)</span>");
 					$.ajax({
 						url:
 							"https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q="+word,
@@ -19,7 +20,23 @@ $('.question').each(function(){
 							"jsonp",
 						success:
 							function(result){
-								alert(result.responseData.results[0].content);
+								var correct = false;
+								for(var xs in result.responseData.results) {
+									var xx = result.responseData.results[xs].content.match(/<b>.*<\/b>/g);
+									for(var x in xx) {
+										var compress2 = xx[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+										compress2 = compress2.substring(3,compress2.length-4);
+										console.log(compress2 + "     " + compress);
+										if(compress2 === compress) {
+											correct = true;
+										}
+									}
+								}
+								if(correct) {
+									resultspan.html("<span style='color:green;'> (ถูกต้อง)</span>");
+								} else {
+									resultspan.html("<span style='color:green;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
+								}
 							}
 					});
 				} else {
