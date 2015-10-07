@@ -9,13 +9,14 @@ $('.question').each(function(){
 		//console.log($(this).val() + "     " + word);
 		if($(this).val().length > 0) {
 			if($(this).val().indexOf(word) == 0) {
-				var compress = $(this).val().match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+				var answer = $(this).val();
+				var compress = answer.match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
 				//console.log("regex : " + compress);
 				if(compress.length >= 25) {
 					resultspan.html("<span style='color:orange;'> (กำลังตรวจสอบ...)</span>");
 					$.ajax({
 						url:
-							"https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q="+word,
+							"https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q="+answer,
 						dataType:
 							"jsonp",
 						success:
