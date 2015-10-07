@@ -36,7 +36,7 @@ $('.question').each(function(){
 								if(correct) {
 									resultspan.html("<span style='color:green;'> (ถูกต้อง)</span>");
 								} else {
-									resultspan.html("<span style='color:green;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
+									resultspan.html("<span style='color:red;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
 								}
 							}
 					});
