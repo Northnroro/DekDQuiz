@@ -25,8 +25,8 @@ $('.question').each(function(){
 								for(var xs in result.responseData.results) {
 									var xx = result.responseData.results[xs].content.match(/<b>.*<\/b>/g);
 									for(var x in xx) {
-										var compress2 = xx[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
-										compress2 = compress2.substring(3,compress2.length-4);
+										var compress2 = xx[x].substring(3,compress2.length-4);
+										compress2 = compress2.match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
 										console.log(compress + "     " + compress2);
 										if(compress2 === compress) {
 											correct = true;
