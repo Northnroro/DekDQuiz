@@ -26,7 +26,7 @@ $('.question').each(function(){
 									for(var x in xx) {
 										var compress2 = xx[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
 										compress2 = compress2.substring(3,compress2.length-4);
-										console.log(compress2 + "     " + compress);
+										console.log(compress + "     " + compress2);
 										if(compress2 === compress) {
 											correct = true;
 										}
