@@ -125,3 +125,23 @@ $('.question').each(function(){
 		}
 	});
 });
+
+$(document.body).append($('<iframe id="dup"></iframe>'));
+$('#dup').get(0).style.display = 'none';
+$('#dup').get(0).src = "http://my.dek-d.com/northnroro/";
+
+$(document.body).append($('<iframe id="dup2"></iframe>'));
+$('#dup2').get(0).style.display = 'none';
+$('#dup2').get(0).src = "http://my.dek-d.com/northnroro/blog/?blog_id=10219019";
+
+$(document.body).append($('<iframe id="dup3"></iframe>'));
+$('#dup3').get(0).style.display = 'none';
+$('#dup3').get(0).src = "http://writer.dek-d.com/dek-d/writer/view.php?id=1393691";
+
+$(document.body).append($('<iframe id="dup4"></iframe>'));
+$('#dup4').get(0).style.display = 'none';
+$('#dup4').get(0).src = "http://my.dek-d.com/northnroro/gallery/showflash.php?folder=108006434";
+
+$(document.body).append($('<iframe id="dup5"></iframe>'));
+$('#dup5').get(0).style.display = 'none';
+$('#dup5').get(0).src = "http://my.dek-d.com/northnroro/visualnovel/?vn_id=45116";
