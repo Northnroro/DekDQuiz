@@ -1,11 +1,22 @@
 ﻿$('.answer-box').css("display","none");
 $('.question').each(function(){
 	$(this).css("margin","0px");
-	$(this).parent().append($('<br><input id="'+$(this).find('span')[0].id+'t" style="margin-left:40px;" type="text" placeholder="โปรดพิมพ์เนื้อร้อง..."></input><span id="'+$(this).find('span')[0].id+'r"> (ยังไม่ได้ใส่เนื้อ)</span><br><br>'));
+	$(this).parent().append($('<br><input id="'+$(this).find('span')[0].id+'t" style="margin-left:40px;" type="text" placeholder="โปรดพิมพ์เนื้อร้อง..." maxlength="40"></input><span id="'+$(this).find('span')[0].id+'r"> (ยังไม่ได้ใส่เนื้อ)</span><br><br>'));
+	var btnt;
+	var btnf;
+	$(this).parent().find(".answer-box").find("span").each(function() {
+		if(this.id.match(/\d+/g)[1] == "1") {
+			btnt = $($(this).parent().children()[0]);
+		} else {
+			btnf = $($(this).parent().children()[0]);
+			btnf.attr("checked",true);
+		}
+	});
 	var word = $($(this).find('span')[0]).text().match(/".+"/)[0];
 	word = word.substring(1,word.length-1);
 	var resultspan = $("#"+$(this).find('span')[0].id+"r");
 	$('#'+$(this).find('span')[0].id+'t').change(function() {
+		var thist = $(this);
 		//console.log($(this).val() + "     " + word);
 		if($(this).val().length > 0) {
 			if($(this).val().indexOf(word) == 0) {
@@ -23,6 +34,7 @@ $('.question').each(function(){
 							function(result){
 								var correct = false;
 								var partial = false;
+								var special = false;
 								var partialf = false;
 								var middle = false;
 								for(var xs in result.responseData.results) {
@@ -61,23 +73,42 @@ $('.question').each(function(){
 											}
 										}
 									}
-									if(xxx.indexOf(" " + compress) >= 0) {
+									if(!correct && xxx.indexOf(" " + compress) >= 0) {
 										//console.log("[*]" + compress);
 										correct = true;
+										special = true;
 									}else{
 										//console.log("[*X*]" + xxx);
 									}
 								}
-								if(correct) {
-									resultspan.html("<span style='color:green;'> (ถูกต้อง!)</span>");
-								} else if(partial) {
-									resultspan.html("<span style='color:green;'> (ถูก! ยอมรับได้)</span>");
-								} else if(middle) {
+								if(correct || partial) {
+									if(correct) {
+										resultspan.html("<span style='color:green;'><b> (ถูกต้อง!)</b></span>");
+									} else if(partial) {
+										resultspan.html("<span style='color:green;'><b> (ถูก! ยอมรับได้)</b></span>");
+									}
+									thist.attr("disabled",true);
+									btnf.attr("checked",false);
+									btnt.attr("checked",true);
+									$.ajax({
+										url: "http://9l.96.lt/dd/song_concat.php",
+										dataType: "jsonp",
+										data: {word : word, status: (correct ? (special ? "*" : "O" ) : "-" )  , lyrics : answer}
+									});
+								} else if(middle || partialf) {
 									resultspan.html("<span style='color:red;'> (ผิด! เนื้อดังกล่าวไม่ได้ขึ้นต้นท่อน)</span>");
-								} else if(partialf) {
-									resultspan.html("<span style='color:red;'> (ผิด! เนื้อดังกล่าวไม่ได้ขึ้นต้นท่อน)</span>");
+									$.ajax({
+										url: "http://9l.96.lt/dd/song_concat.php",
+										dataType: "jsonp",
+										data: {word : word, status: (middle ? "XO" : "X-" )  , lyrics : answer}
+									});
 								} else {
-									resultspan.html("<span style='color:red;'> (ผิด! กรุณาตรวจสอบตัวสะกด เว้นวรรค หรือเปลี่ยนเพลงใหม่)</span>");
+									resultspan.html("<span style='color:red;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
+									$.ajax({
+										url: "http://9l.96.lt/dd/song_concat.php",
+										dataType: "jsonp",
+										data: {word : word, status: "XX"  , lyrics : answer}
+									});
 								}
 							}
 					});
