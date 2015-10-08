@@ -25,9 +25,12 @@ $('.question').each(function(){
 								for(var xs in result.responseData.results) {
 									var xx = result.responseData.results[xs].content.match(/<b>.*<\/b>/g);
 									for(var x=0; x<xx.length; x++) {
-										var compress2 = xx[x].substring(3,xx[x].length-4);
-										if(compress2.match(/<b>.*<\/b>/g) != null) {
-											xx = xx.concat(compress2.match(/<b>.*<\/b>/g));
+										xx[x] = xx[x].substring(3,xx[x].length-4);
+									}
+									for(var x=0; x<xx.length; x++) {
+										var compress2 = xx[x];
+										if(compress2.split(/(<b>)|(<\/b>)/).length > 1) {
+											xx = xx.concat(compress2.split(/(<b>)|(<\/b>)/));
 											continue;
 										}
 										compress2 = compress2.match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
