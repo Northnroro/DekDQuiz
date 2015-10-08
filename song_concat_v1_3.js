@@ -91,23 +91,44 @@ $('.question').each(function(){
 									btnf.attr("checked",false);
 									btnt.attr("checked",true);
 									$.ajax({
-										url: "http://9l.96.lt/dd/song_concat.php",
-										dataType: "jsonp",
-										data: {word : word, status: (correct ? (special ? "*" : "O" ) : "-" )  , lyrics : answer, name: $('#aliasname').get(0).value}
+										url:"https://api.parse.com/1/classes/Guess",
+										type:"POST",
+										headers: {"X-Parse-Application-Id": "06wmZr3HsrBy7K1SfhI0bHvzSXwve3BVcJp8IKCt",
+											"X-Parse-REST-API-Key": "zXylpZpNaIcR9XKknjRnQbFQGqVtWRr3Pqoo7pSF"},
+										data:'{"word":'+ word +', "status":'+ (correct ? (special ? "*" : "O" ) : "-" ) +', "lyrics":'+ answer +', "name":'+ $("#aliasname").get(0).value +'}',
+										contentType:"application/json; charset=utf-8",
+										dataType:"json",
+										success: function(data) {
+											
+										}
 									});
 								} else if(middle || partialf) {
 									resultspan.html("<span style='color:red;'> (ผิด! เนื้อดังกล่าวไม่ได้ขึ้นต้นท่อน)</span>");
 									$.ajax({
-										url: "http://9l.96.lt/dd/song_concat.php",
-										dataType: "jsonp",
-										data: {word : word, status: (middle ? "XO" : "X-" )  , lyrics : answer, name: $('#aliasname').get(0).value}
+										url:"https://api.parse.com/1/classes/Guess",
+										type:"POST",
+										headers: {"X-Parse-Application-Id": "06wmZr3HsrBy7K1SfhI0bHvzSXwve3BVcJp8IKCt",
+											"X-Parse-REST-API-Key": "zXylpZpNaIcR9XKknjRnQbFQGqVtWRr3Pqoo7pSF"},
+										data:'{"word":'+ word +', "status":'+ (middle ? "XO" : "X-" ) +', "lyrics":'+ answer +', "name":'+ $("#aliasname").get(0).value +'}',
+										contentType:"application/json; charset=utf-8",
+										dataType:"json",
+										success: function(data) {
+											
+										}
 									});
 								} else {
 									resultspan.html("<span style='color:red;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
 									$.ajax({
-										url: "http://9l.96.lt/dd/song_concat.php",
-										dataType: "jsonp",
-										data: {word : word, status: "XX"  , lyrics : answer, name: $('#aliasname').get(0).value}
+										url:"https://api.parse.com/1/classes/Guess",
+										type:"POST",
+										headers: {"X-Parse-Application-Id": "06wmZr3HsrBy7K1SfhI0bHvzSXwve3BVcJp8IKCt",
+											"X-Parse-REST-API-Key": "zXylpZpNaIcR9XKknjRnQbFQGqVtWRr3Pqoo7pSF"},
+										data:'{"word":'+ word +', "status":'+ "XX" +', "lyrics":'+ answer +', "name":'+ $("#aliasname").get(0).value +'}',
+										contentType:"application/json; charset=utf-8",
+										dataType:"json",
+										success: function(data) {
+											
+										}
 									});
 								}
 							}
@@ -123,9 +144,6 @@ $('.question').each(function(){
 		} else {
 			resultspan.html("<span> (ยังไม่ได้ใส่เนื้อ)</span>");
 		}
-	});
-	$('#'+$(this).find('span')[0].id+'t').keypress(function() {
-		
 	});
 });
 
