@@ -51,7 +51,7 @@ $('.question').each(function(){
 											if(compress2 === compress) {
 												//console.log("[O] " + compress2);
 												correct = true;
-											}else if(compress2.length >= compress.length*4/5) {
+											}else if(compress2.length >= compress.length*7/8) {
 												//console.log("[-] " + compress2);
 												partial = true;
 											}else{
