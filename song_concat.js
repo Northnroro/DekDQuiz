@@ -12,7 +12,7 @@ $('.question').each(function(){
 				var answer = $(this).val();
 				var compress = answer.match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
 				//console.log("regex : " + compress);
-				if(compress.length >= 25) {
+				if(compress.length >= 20) {
 					resultspan.html("<span style='color:orange;'> (กำลังตรวจสอบ...)</span>");
 					$.ajax({
 						url:
@@ -23,20 +23,19 @@ $('.question').each(function(){
 							function(result){
 								var correct = false;
 								for(var xs in result.responseData.results) {
-									var xx = result.responseData.results[xs].content.match(/<b>.*<\/b>/g);
-									for(var x=0; x<xx.length; x++) {
-										xx[x] = xx[x].substring(3,xx[x].length-4);
-									}
+									var xx = " " + result.responseData.results[xs].content;
+									xx = xx.split(/<\/b>/);
 									for(var x=0; x<xx.length; x++) {
 										var compress2 = xx[x];
-										if(compress2.split(/(<b>)|(<\/b>)/).length > 1) {
-											xx = xx.concat(compress2.split(/<b>|<\/b>/));
-											continue;
-										}
-										compress2 = compress2.match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
-										console.log(compress + "     " + compress2);
-										if(compress2 === compress) {
-											correct = true;
+										if(compress2.split(/ <b>/).length > 1) {
+											compress2 = compress2.split(/ <b>/)[1];
+											compress2 = compress2.match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+											if(compress2 === compress) {
+												console.log("[OK] " + compress2);
+												correct = true;
+											}else{
+												console.log("[X]" + compress2);
+											}
 										}
 									}
 								}
@@ -48,7 +47,7 @@ $('.question').each(function(){
 							}
 					});
 				} else {
-					resultspan.html("<span style='color:red;'> (เนื้อสั้นเกินไป ขาดอีก"+(25-compress.length)+"ตัวอักษร)</span>");
+					resultspan.html("<span style='color:red;'> (เนื้อสั้นเกินไป ขาดอีก"+(20-compress.length)+"ตัวอักษร)</span>");
 				}
 			} else if($(this).val().indexOf(word) < 0) {
 				resultspan.html("<span style='color:red;'> (ไม่มีคำที่กำหนด)</span>");
