@@ -157,7 +157,7 @@ $('.question').each(function(){
 			dataType:"json",
 			success: function(data){
 				resultspan.html("<span style='color:green;'><b> (เฉลยแล้ว! ต้องการสุ่มเฉลยอีกโปรดคลิกอีกครั้ง)</b></span>");
-				thist.attr("disabled",true);
+				lyricsinput.attr("disabled",true);
 				lyricsinput.val(data.result);
 			}
 		});
