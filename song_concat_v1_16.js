@@ -92,7 +92,7 @@ $('.question').each(function(){
 										if(compress2.length > word.length-1 && compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
 											var compress3 = yy[x+1].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
 											if(compress3.length < 10) {
-												hint += "<b>" + yy[x+1] + "</b>" + yy[x+2] + "...";
+												hint += "<b>\"" + yy[x+1].trim() + "\"</b>" + yy[x+2] + "...";
 												if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
 													longestHint = hint;
 												}
@@ -105,7 +105,7 @@ $('.question').each(function(){
 										if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
 											var compress3 = yy[x-1].split(" ");
 											if(compress3.length > 1) {
-												hint = "<b>" + compress3[compress3.length-1] + "</b>" + hint;
+												hint = "<b>\"" + compress3[compress3.length-1].trim() + "\"</b>" + hint;
 												if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestMiddleHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
 													longestMiddleHint = hint;
 												}
