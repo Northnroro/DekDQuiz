@@ -19,6 +19,8 @@ $('.question').each(function(){
 	var guessbtn = $('#'+$(this).find('span')[0].id+'b');
 	lyricsinput.change(function() {
 		var thist = $(this);
+		var longestHint = "";
+		var longestmiddleHint = "";
 		//console.log($(this).val() + "     " + word);
 		if($(this).val().length > 0) {
 			if($(this).val().indexOf(word) == 0) {
@@ -82,6 +84,34 @@ $('.question').each(function(){
 									}else{
 										//console.log("[*X*]" + xxx);
 									}
+									var yy = result.responseData.results[xs].content;
+									yy = yy.split(/<b>|<\/b>/);
+									for(var x=0; x<yy.length-2; x++) {
+										var hint = yy[x];
+										var compress2 = yy[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+										if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
+											var compress3 = yy[x+1].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+											if(compress3.length < 10) {
+												hint += "<b>\"" + yy[x+1] + "\"</b>" + yy[x+2] + "...";
+												if(hint.length > longestHint.length) {
+													longestHint = hint;
+												}
+											}
+										}
+									}
+									for(var x=1; x<yy.length; x++) {
+										var hint = yy[x];
+										var compress2 = yy[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+										if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
+											var compress3 = yy[x-1].split(" ");
+											if(compress3.length > 1) {
+												hint = "... <b>\"" + compress3[compress3.length-1] + "\"</b>" + hint;
+												if(hint.length > longestMiddleHint.length) {
+													longestMiddleHint = hint;
+												}
+											}
+										}
+									}
 								}
 								if(correct || partial) {
 									if(correct) {
@@ -106,7 +136,7 @@ $('.question').each(function(){
 									});
 									guessbtn.attr("disabled", true);
 								} else if(middle || partialf) {
-									resultspan.html("<span style='color:red;'> (ผิด! เนื้อดังกล่าวไม่ได้ขึ้นต้นท่อน)</span>");
+									resultspan.html("<span style='color:red;'> (ผิด! เนื้อดังกล่าวไม่ได้ขึ้นต้นท่อน [มาจาก: "+ longestMiddleHint +"])</span>");
 									$.ajax({
 										url:"https://api.parse.com/1/classes/Guess",
 										type:"POST",
@@ -120,7 +150,11 @@ $('.question').each(function(){
 										}
 									});
 								} else {
-									resultspan.html("<span style='color:red;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
+									if(longestHint.length > 0) {
+										resultspan.html("<span style='color:red;'> (ผิด! [ตัวช่วย: "+ longestHint +"])</span>");
+									} else {
+										resultspan.html("<span style='color:red;'> (ผิด! กรุณาตรวจสอบตัวสะกด หรือเปลี่ยนเพลงใหม่)</span>");
+									}
 									$.ajax({
 										url:"https://api.parse.com/1/classes/Guess",
 										type:"POST",
