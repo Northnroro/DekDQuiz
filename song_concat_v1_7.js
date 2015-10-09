@@ -1,7 +1,7 @@
 ﻿$('.answer-box').css("display","none");
 $('.question').each(function(){
 	$(this).css("margin","0px");
-	$(this).parent().append($('<br><input id="'+$(this).find('span')[0].id+'t" style="margin-left:40px;" type="text" placeholder="โปรดพิมพ์เนื้อร้อง..." maxlength="40"></input></input><span id="'+$(this).find('span')[0].id+'r"> (ยังไม่ได้ใส่เนื้อ)</span><br><input id="'+$(this).find('span')[0].id+'b" type="button" style="margin-left:40px;" value="เฉลย"><br><br>'));
+	$(this).parent().append($('<br><input id="'+$(this).find('span')[0].id+'t" style="margin-left:40px;" type="text" placeholder="โปรดพิมพ์เนื้อร้อง..." maxlength="40"></input></input><span id="'+$(this).find('span')[0].id+'r"> (ยังไม่ได้ใส่เนื้อ)</span><br><input id="'+$(this).find('span')[0].id+'b" type="button" style="margin-left:40px;" value="คิดไม่ออก เฉลยที!"><br><br>'));
 	var btnt;
 	var btnf;
 	$(this).parent().find(".answer-box").find("span").each(function() {
@@ -16,6 +16,7 @@ $('.question').each(function(){
 	word = word.substring(1,word.length-1);
 	var resultspan = $("#"+$(this).find('span')[0].id+"r");
 	var lyricsinput = $('#'+$(this).find('span')[0].id+'t');
+	var guessbtn = $('#'+$(this).find('span')[0].id+'b');
 	lyricsinput.change(function() {
 		var thist = $(this);
 		//console.log($(this).val() + "     " + word);
@@ -103,6 +104,7 @@ $('.question').each(function(){
 											
 										}
 									});
+									guessbtn.attr("disabled", true);
 								} else if(middle || partialf) {
 									resultspan.html("<span style='color:red;'> (ผิด! เนื้อดังกล่าวไม่ได้ขึ้นต้นท่อน)</span>");
 									$.ajax({
