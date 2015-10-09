@@ -131,7 +131,21 @@ $('.question').each(function(){
 													}
 												}
 											} else {
-												
+												for(var i=0;i<Math.min(compress2.length,compress.length);i++) {
+													if(compress.charAt(i) != compress2.charAt(i)) {
+														hint = compress.substring(0,i);
+														for(var j=0;j<Math.max(compress2.length,compress.length)-i;j++) {
+															if(compress.charAt(compress.length-j-1) != compress2.charAt(compress2.length-j-1)) {
+																hint += "<b>\"" + compress.substring(i,compress.length-j) + "\"</b>" + compress.substring(compress.length-j,compress.length) + "...";
+																if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestMiddleHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
+																	longestMiddleHint = hint;
+																}
+																break;
+															}
+														}
+														break;
+													}
+												}
 											}
 										}
 									}
