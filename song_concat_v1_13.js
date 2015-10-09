@@ -89,7 +89,7 @@ $('.question').each(function(){
 									for(var x=0; x<yy.length-2; x++) {
 										var hint = yy[x];
 										var compress2 = yy[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
-										if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
+										if(compress2.length > word.length-1 && compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
 											var compress3 = yy[x+1].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
 											if(compress3.length < 10) {
 												hint += "<b>\"" + yy[x+1] + "\"</b>" + yy[x+2] + "...";
