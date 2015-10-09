@@ -90,12 +90,30 @@ $('.question').each(function(){
 									for(var x=0; x<yy.length-2; x++) {
 										var hint = yy[x];
 										var compress2 = yy[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
-										if(compress2.length > word.length-1 && compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
-											var compress3 = yy[x+1].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
-											if(compress3.length < 10 && compress3.length > 0) {
-												hint += "<b>\"" + yy[x+1].trim() + "\"</b>" + yy[x+2] + "...";
-												if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
-													longestHint = hint;
+										if(compress2.length > word.length-1) {
+											if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
+												var compress3 = yy[x+1].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
+												if(compress3.length < 10 && compress3.length > 0) {
+													hint += "<b>\"" + yy[x+1].trim() + "\"</b>" + yy[x+2] + "...";
+													if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
+														longestHint = hint;
+													}
+												}
+											} else {
+												for(var i=0;i<Math.min(compress2.length,compress.length);i++) {
+													if(compress.charAt(i) != compress2.charAt(i)) {
+														hint = compress.substring(0,i);
+														for(var j=0;j<Math.max(compress2.length,compress.length)-i;j++) {
+															if(compress.charAt(compress.length-j-1) != compress2.charAt(compress2.length-j-1)) {
+																hint += "<b>\"" + compress.substring(i,compress.length-j) + "\"</b>" + compress.substring(compress.length-j,compress.length) + "...";
+																if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
+																	longestHint = hint;
+																}
+																break;
+															}
+														}
+														break;
+													}
 												}
 											}
 										}
@@ -103,13 +121,17 @@ $('.question').each(function(){
 									for(var x=1; x<yy.length; x++) {
 										var hint = yy[x];
 										var compress2 = yy[x].match(/[A-Za-z0-9ก-๙]*/g).join("").toUpperCase();
-										if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
-											var compress3 = yy[x-1].split(" ");
-											if(compress3.length > 1) {
-												hint = "<b>\"" + compress3[compress3.length-1].trim() + "\"</b>" + hint;
-												if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestMiddleHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
-													longestMiddleHint = hint;
+										if(compress2.length > word.length-1) {
+											if(compress2 == compress.substring(0,Math.min(compress2.length,compress.length))) {
+												var compress3 = yy[x-1].split(" ");
+												if(compress3.length > 1) {
+													hint = "<b>\"" + compress3[compress3.length-1].trim() + "\"</b>" + hint;
+													if(hint.match(/[A-Za-z0-9ก-๙]*/g).join("").length > longestMiddleHint.match(/[A-Za-z0-9ก-๙]*/g).join("").length) {
+														longestMiddleHint = hint;
+													}
 												}
+											} else {
+												
 											}
 										}
 									}
