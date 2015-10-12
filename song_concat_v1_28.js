@@ -38,8 +38,11 @@ $('.question').each(function(){
 							"jsonp",
 						success:
 							function(result){
-								if(result.responseData == null)
+								if(result.responseData == null) {
+									resultspan.html("<span style='color:red;'><b>(กรุณารอสักครู่นะคะ... ขอโทษที่ให้รอนานค่ะ)</b></span>");
+									thist.change();
 									return;
+								}
 								for(var xs in result.responseData.results) {
 									var yy = result.responseData.results[xs].content;
 									yy = yy.split(/<b>|<\/b>/);
