@@ -1,6 +1,6 @@
 ﻿for(var i=1;i<=32;i++) {
 	$('#q'+i).append($('<br>'));
-	$('#q'+i).append(<div style="width:175px;height220px"></div>);
+	$('#q'+i).append($('<div style="width:175px;height220px"></div>'));
 	var ele = $('<img src="http://img-9gag-fun.9cache.com/photo/aOmj2AM_700b.jpg">');
 	$('#q'+i).append(ele);
 	var topp = 161+Math.floor((i-1)/4)*220+Math.floor((i-1)/8)*22+Math.floor((i-1)/24)*8;
