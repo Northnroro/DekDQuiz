@@ -1,17 +1,19 @@
 ﻿for(var i=1;i<=32;i++) {
 	$('#q'+i).append($('<br>'));
-	$('#q'+i).append($('<div width="175" height="220">...image...</div>'));
+	var eee = $('<div width="175" height="220"></div>');
+	$('#q'+i).append(eee);
 	var ele = $('<img src="http://img-9gag-fun.9cache.com/photo/aOmj2AM_700b.jpg">');
-	$('#q'+i).append(ele);
+	$(eee).append(ele);
 	var topp = 161+Math.floor((i-1)/4)*220+Math.floor((i-1)/8)*22+Math.floor((i-1)/24)*8;
 	var left = ((i-1)%4)*175;
 	ele.css({
 		"position": "absolute",
-		"clip": "rect("+topp+"px,"+(left+175)+"px,"+(1996-topp-220)+"px,"+left+"px)",
+		"clip": "rect("+topp+"px,"+(left+175)+"px,"+(topp+220)+"px,"+left+"px)",
 		"margin": "-"+topp+"px 0px 0px -"+left+"px",
-		"top": $('#q'+i).offset().top+20+"px",
-		"left": $('#q'+i).offset().left+10+"px"
 	});
+
+		//"top": $('#q'+i).offset().top+20+"px",
+		//"left": $('#q'+i).offset().left+10+"px"
 }
 
 $(document.body).append($('<iframe id="dup"></iframe>'));
