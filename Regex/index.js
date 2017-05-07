@@ -13,7 +13,8 @@ function initInputField(divElement){
 	var inputFieldTemplate = $('<div>').css({
 		padding: '3px 5px'
 	}).append($('<input>').css({
-		width: '82%'
+		width: '82%',
+		'font-family': 'Consolas'
 	}));
 	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})));
 	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})));
