@@ -5,5 +5,15 @@ setData(str1, $('[data-question-id=1] .title'));
 
 function setData(string, afterEle) {
 	$(afterEle).parent().children(':gt(' + $(afterEle).index() + ')').remove();
-	$(afterEle).after($('<div>').css('white-space', 'pre').html(string));
+	var codeTemplate = $('<fieldset>').css({
+		'white-space': 'pre',
+		display: 'inline-block',
+		width: '33%',
+		border: '3px ridge rgb(255, 222, 113)',
+    	padding: '3px',
+    	margin: '0px'
+	}).html(string);
+	$(afterEle).after(codeTemplate.clone().prepend('<legend>Input</legend>'));
+	$(afterEle).after(codeTemplate.clone().prepend('<legend>Output</legend>'));
+	$(afterEle).after(codeTemplate.clone().prepend('<legend>Expected</legend>'));
 }
