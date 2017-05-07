@@ -6,7 +6,7 @@ setData(data1, $('[data-question-id=1] .title'), ans1);
 
 function setData(data, afterEle, answer) {
 	$(afterEle).parent().children(':gt(' + $(afterEle).index() + ')').remove();
-	var codeTemplate = $('<fieldset>').css({
+	var codeBox = $('<fieldset>').css({
 		'white-space': 'pre',
 		display: 'inline-block',
 		width: '33%',
@@ -14,18 +14,18 @@ function setData(data, afterEle, answer) {
     	padding: '3px',
     	margin: '0px'
 	});
-	$(afterEle).after(codeTemplate.clone().prepend($('<legend>Expected</legend>').css({
+	$(afterEle).after(codeBox.clone().html(answer).prepend($('<legend>Expected</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
-	})).html(answer));
-	$(afterEle).after(codeTemplate.clone().prepend($('<legend>Output</legend>').css({
+	})));
+	$(afterEle).after(codeBox.clone().html(data).prepend($('<legend>Output</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})).css({
 		'border-width': '3px 0px'
-	}).html(data));
-	$(afterEle).after(codeTemplate.clone().prepend($('<legend>Input</legend>').css({
+	}));
+	$(afterEle).after(codeBox.clone().html(data).prepend($('<legend>Input</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
-	})).html(data));
+	})));
 }
