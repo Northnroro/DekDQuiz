@@ -1,1 +1,1 @@
-body.show();
+$('body').show();
