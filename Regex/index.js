@@ -21,10 +21,11 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 		var findDiv = inputFieldTemplate.clone();
 		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
-				var result, findTxt = input.children('input').val();
-				while(result = dataStrings[i].match(new RegExp(findTxt))){
-					findTxt = findTxt.substring(result.index + 1);
-					console.log(result);
+				var result, string = dataStrings[i], matches = [];
+				while((result = string.match(new RegExp(input.children('input').val()))) && string.length > 0){
+					string = string.substring(result.index + 1);
+					matches.push({start: result.index, length: result[0]});
+					console.log(matches);
 				}
 			};
 		})(i,$(findDiv))));
