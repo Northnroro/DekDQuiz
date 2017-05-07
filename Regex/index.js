@@ -4,6 +4,6 @@ var str1 = "นาย ก,74\nนาย ข,99\nนาย ค,5\nนางสา
 setData(str1, $('[data-question-id=1] .title'));
 
 function setData(string, afterEle) {
-	$(afterEle).parent().children(':not(:first-child)').remove();
+	$(afterEle).parent().children(':gt(' + $(afterEle).index() + ')').remove();
 	$(afterEle).after($('<div>').css('white-space', 'pre').html(string));
 }
