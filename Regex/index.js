@@ -18,16 +18,18 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 		'font-family': 'Consolas'
 	}).attr('placeholder', '(max. 50 characters)'));
 	for(var i in dataStrings){
-		$(divElements[i]).append(inputFieldTemplate.clone().prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
+		var findField = inputFieldTemplate.clone();
+		$(divElements[i]).append(findField.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
 				console.log(dataStrings[i].match(new RegExp(input.val())));
 			};
-		})(i,$(this))));
-		$(divElements[i]).append(inputFieldTemplate.clone().prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
+		})(i,$(findField))));
+		var replaceField = inputFieldTemplate.clone();
+		$(divElements[i]).append(replaceField.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
 				console.log(answerStrings[i]);
 			};
-		})(i,$(this))));
+		})(i,$(replaceField))));
 	}
 }
 
