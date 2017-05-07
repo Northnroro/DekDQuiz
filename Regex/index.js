@@ -12,9 +12,11 @@ setData(data1, $('[data-question-id=1] .title'), ans1);
 function initInputField(divElement){
 	var inputFieldTemplate = $('<div>').css({
 		padding: '3px 5px'
-	}).append($('<input>'));
-	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Find: ")));
-	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Replace: ")));
+	}).append($('<input>').css({
+		width: '82%'
+	}));
+	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})));
+	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})));
 }
 
 function setData(data, afterElement, answer) {
