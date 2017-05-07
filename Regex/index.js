@@ -18,18 +18,22 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 		'font-family': 'Consolas'
 	}).attr('placeholder', '(max. 50 characters)'));
 	for(var i in dataStrings){
-		var findField = inputFieldTemplate.clone();
-		$(divElements[i]).append(findField.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
+		var findDiv = inputFieldTemplate.clone();
+		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
-				console.log(dataStrings[i].match(new RegExp(input.val())));
+				var result, findTxt = input.children('input').val();
+				while(result = dataStrings[i].match(new RegExp(findTxt.substring(startPos)))){
+					findTxt = findTxt.substring(result.index + 1);
+					console.log(result);
+				}
 			};
-		})(i,$(findField))));
-		var replaceField = inputFieldTemplate.clone();
-		$(divElements[i]).append(replaceField.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
+		})(i,$(findDiv))));
+		var replaceDiv = inputFieldTemplate.clone();
+		$(divElements[i]).append(replaceDiv.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
 				console.log(answerStrings[i]);
 			};
-		})(i,$(replaceField))));
+		})(i,$(replaceDiv))));
 	}
 }
 
