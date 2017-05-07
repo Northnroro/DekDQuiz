@@ -16,7 +16,7 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 	}).append($('<input>').css({
 		width: '82%',
 		'font-family': 'Consolas'
-	}).attr('placeholder', '(max. 50 characters)'));
+	}).attr('placeholder', '(max. 50 characters)').attr('maxlength', 50));
 	for(var i in dataStrings){
 		var findDiv = inputFieldTemplate.clone();
 		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
