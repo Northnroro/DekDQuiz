@@ -21,12 +21,14 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 		var findDiv = inputFieldTemplate.clone();
 		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
-				var result, string = dataStrings[i], matches = [];
+				var result, string = dataStrings[i], matches = [], currPos = 0;;
 				while((result = string.match(new RegExp(input.children('input').val()))) && string.length > 0){
 					string = string.substring(result.index + 1);
-					matches.push({start: result.index, length: result[0]});
+					matches.push({start: currPos + result.index, length: result[0].length});
+					currPos += result.index + 1;
 					console.log(matches);
 				}
+				setData(dataStrings[i], bindQuestionTitles[i], answerStrings[i], matches);
 			};
 		})(i,$(findDiv))));
 		var replaceDiv = inputFieldTemplate.clone();
@@ -38,7 +40,7 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 	}
 }
 
-function setData(data, afterElement, answer) {
+function setData(data, afterElement, answer, hilight) {
 	$(afterElement).parent().children(':gt(' + $(afterElement).index() + ')').remove();
 	var codeBoxTemplate = $('<fieldset>').css({
 		'white-space': 'pre',
@@ -60,7 +62,19 @@ function setData(data, afterElement, answer) {
 	})).css({
 		'border-width': '3px 0px'
 	}));
-	$(afterElement).after(codeBoxTemplate.clone().html(data).prepend($('<legend>Input</legend>').css({
+	// Input + Hilight
+	var hilightedData = "", currPos = 0;
+	if(hilight){
+		for(var i in hilight){
+			hilightedData += data.substring(currPos, hilight[i].start);
+			hilightedData += $('<div>').append($('<span>').css({background: 'yellow'}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length))).html();
+			currPos = hilight[i].start + hilight[i].length;
+		}
+		hilightedData += data.substring(currPos);
+	}else{
+		hilightedData = data;
+	}
+	$(afterElement).after(codeBoxTemplate.clone().html(hilightedData).prepend($('<legend>Input</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})));
