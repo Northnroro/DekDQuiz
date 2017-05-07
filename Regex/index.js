@@ -22,7 +22,7 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
 			return function(){
 				var result, findTxt = input.children('input').val();
-				while(result = dataStrings[i].match(new RegExp(findTxt.substring(startPos)))){
+				while(result = dataStrings[i].match(new RegExp(findTxt))){
 					findTxt = findTxt.substring(result.index + 1);
 					console.log(result);
 				}
