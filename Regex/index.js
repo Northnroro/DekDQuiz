@@ -26,7 +26,6 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 					string = string.substring(result.index + 1);
 					matches.push({start: currPos + result.index, length: result[0].length});
 					currPos += result.index + 1;
-					console.log(matches);
 				}
 				setData(dataStrings[i], bindQuestionTitles[i], answerStrings[i], matches);
 			};
