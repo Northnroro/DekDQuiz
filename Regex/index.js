@@ -13,7 +13,16 @@ function setData(string, afterEle) {
     	padding: '3px',
     	margin: '0px'
 	}).html(string);
-	$(afterEle).after(codeTemplate.clone().prepend('<legend>Input</legend>'));
-	$(afterEle).after(codeTemplate.clone().prepend('<legend>Output</legend>'));
-	$(afterEle).after(codeTemplate.clone().prepend('<legend>Expected</legend>'));
+	$(afterEle).after(codeTemplate.clone().prepend($('<legend>Expected</legend>').css({
+		padding: '0px 5px',
+    	'margin-left': '5px'
+	})));
+	$(afterEle).after(codeTemplate.clone().prepend($('<legend>Output</legend>').css({
+		padding: '0px 5px',
+    	'margin-left': '5px'
+	})));
+	$(afterEle).after(codeTemplate.clone().prepend($('<legend>Input</legend>').css({
+		padding: '0px 5px',
+    	'margin-left': '5px'
+	})));
 }
