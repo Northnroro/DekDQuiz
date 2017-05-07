@@ -67,7 +67,11 @@ function setData(data, afterElement, answer, hilight) {
 	if(hilight){
 		for(var i in hilight){
 			hilightedData += data.substring(currPos, hilight[i].start);
-			hilightedData += $('<div>').append($('<span>').css({background: 'yellow'}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length))).html();
+			hilightedData += $('<div>').append($('<span>').css({
+				background: '#ffd600',
+			    'box-shadow': 'inset 0px 0px 0px 1px #ff9c00',
+			    'border-radius': '3px'
+			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length))).html();
 			currPos = hilight[i].start + hilight[i].length;
 		}
 		hilightedData += data.substring(currPos);
