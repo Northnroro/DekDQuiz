@@ -23,9 +23,9 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 			return function(){
 				var result, string = dataStrings[i], matches = [], currPos = 0;;
 				while((result = string.match(new RegExp(input.children('input').val()))) && string.length > 0){
-					string = string.substring(result.index + 1);
+					string = string.substring(result.index + Math.max(1, result[0].length));
 					matches.push({start: currPos + result.index, length: result[0].length});
-					currPos += result.index + 1;
+					currPos += result.index + Math.max(1, result[0].length);
 				}
 				setData(dataStrings[i], bindQuestionTitles[i], answerStrings[i], matches);
 			};
