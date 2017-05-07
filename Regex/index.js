@@ -1,23 +1,34 @@
 $('body').show();
 $('.choice-item').hide();
-initInputField($('[data-question-id] .choice-row').css({
-	border: '1px #ffcfa0 solid',
-    background: '#ffe8cd'
-}));
 
 var data1 = "นาย ก,74\nนาย ข,99\nนาย ค,5\nนางสาว ง,47\nด.ญ. ฉ,100\n"
 var ans1 = "74\n99\n5\n47\n100\n"
 setData(data1, $('[data-question-id=1] .title'), ans1);
 
-function initInputField(divElement){
+initInputField($('[data-question-id] .choice-row').css({
+	border: '1px #ffcfa0 solid',
+    background: '#ffe8cd'
+}), $('[data-question-id] .title'), [data1], [ans1]);
+
+function initInputField(divElements, bindQuestionTitles, dataStrings, answerStrings){
 	var inputFieldTemplate = $('<div>').css({
 		padding: '3px 5px'
 	}).append($('<input>').css({
 		width: '82%',
 		'font-family': 'Consolas'
-	}));
-	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})));
-	$(divElement).append(inputFieldTemplate.clone().prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})));
+	}).attr('placeholder', '(max. 50 characters)'));
+	for(var i in dataStrings){
+		$(divElements[i]).append(inputFieldTemplate.clone().prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
+			return function(){
+				console.log(dataStrings[i].match(new RegExp(input.val())));
+			};
+		})(i,$(this))));
+		$(divElements[i]).append(inputFieldTemplate.clone().prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup((function(i,input){
+			return function(){
+				console.log(answerStrings[i]);
+			};
+		})(i,$(this))));
+	}
 }
 
 function setData(data, afterElement, answer) {
