@@ -64,7 +64,7 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 				background: 'rgb(217, 245, 166)',
 			    'box-shadow': 'rgb(139, 195, 33) 0px 0px 0px 1px',
 			    'border-radius': '3px'
-			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + (replaceRegex.length > 0 replaceRegex : '') + '\"')))).html();
+			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + (replaceRegex && replaceRegex.length > 0 ? replaceRegex : '') + '\"')))).html();
 			currPos = hilight[i].start + hilight[i].length;
 		}
 		hilightedData += data.substring(currPos);
