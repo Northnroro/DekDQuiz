@@ -61,10 +61,10 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 			    'border-radius': '3px'
 			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length))).html();
 			hilightedResult += $('<div>').append($('<span>').css({
-				background: '#ffd600',
-			    'box-shadow': 'inset 0px 0px 0px 1px #ff9c00',
+				background: 'rgb(217, 245, 166)',
+			    'box-shadow': 'rgb(139, 195, 33) 0px 0px 0px 1px',
 			    'border-radius': '3px'
-			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + (replaceRegex || '') + '\"')))).html();
+			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + (replaceRegex.length > 0 replaceRegex : '') + '\"')))).html();
 			currPos = hilight[i].start + hilight[i].length;
 		}
 		hilightedData += data.substring(currPos);
@@ -82,7 +82,7 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})).css({
-		'border-width': '3px 0px'
+		    margin: '0px -3px'
 	}));
 	$(afterElement).after(codeBoxTemplate.clone().html(hilightedData).prepend($('<legend>Input</legend>').css({
 		padding: '0px 5px',
