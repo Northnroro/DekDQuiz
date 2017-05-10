@@ -74,18 +74,25 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 		hilightedResult = data;
 	}
 	// Attach code box with html text
-	$(afterElement).after(codeBoxTemplate.clone().html(answer).prepend($('<legend>Expected</legend>').css({
+	var answerCodeBox, resultCodeBox, dataCodeBox;
+	$(afterElement).after(answerCodeBox = codeBoxTemplate.clone().html(answer).prepend($('<legend>Expected</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})));
-	$(afterElement).after(codeBoxTemplate.clone().html(hilightedResult).prepend($('<legend>Output</legend>').css({
+	$(afterElement).after(resultCodeBox = codeBoxTemplate.clone().html(hilightedResult).prepend($('<legend>Output</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})).css({
 		    margin: '0px -3px'
 	}));
-	$(afterElement).after(codeBoxTemplate.clone().html(hilightedData).prepend($('<legend>Input</legend>').css({
+	$(afterElement).after(dataCodeBox = codeBoxTemplate.clone().html(hilightedData).prepend($('<legend>Input</legend>').css({
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})));
+	// Check answer'
+	var isCorrect = resultCodeBox.clone().children('legend').remove().end().text() == answerCodeBox.clone().children('legend').remove().end().text();
+	$(afterElement).parent().parent().find('.choice-item[title=' + (isCorrect ? 'ถูก' : 'ผิด') + '] input').click();
+	if(isCorrect){
+		$(afterElement).parent().parent().find('input').prop('disabled', true).css('box-shadow','0px 0px 10px 10px rgba(0,255,0,0.3) inset');
+	}
 }
