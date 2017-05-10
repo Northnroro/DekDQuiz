@@ -19,8 +19,8 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 	}).attr('placeholder', '(max. 50 characters)').attr('maxlength', 50));
 	for(var i in dataStrings){
 		var findDiv = inputFieldTemplate.clone();
-		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
 		var replaceDiv = inputFieldTemplate.clone();
+		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
 		$(divElements[i]).append(replaceDiv.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
 	}
 }
@@ -64,7 +64,7 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 				background: 'rgb(217, 245, 166)',
 			    'box-shadow': 'rgb(139, 195, 33) 0px 0px 0px 1px',
 			    'border-radius': '3px'
-			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + (replaceRegex && replaceRegex.length > 0 ? replaceRegex : '') + '\"')))).html();
+			}).text(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + replaceRegex + '\"')))).html();
 			currPos = hilight[i].start + hilight[i].length;
 		}
 		hilightedData += data.substring(currPos);
