@@ -1,11 +1,12 @@
 $('body').show();
 $('.choice-item').hide();
+var scrollTop = -1;
 
 var data1 = "นาย ก,74\nนาย ข,99\nนาย ค,5\nนางสาว ง,47\nด.ญ. ฉ,100";
 var ans1 = "74\n99\n5\n47\n100";
 setData(data1, $('[data-question-id=1] .title'), ans1);
 
-var data2 = '<form id="piform" action="submit.php" method="POST">\n	<fieldset>\n		<legend>Personal</legend>\n		<input id="first" type="text"><br>\n		<input id="middlename" type="text"><br>\n		<input type="text" id="last"><br>\n	</fieldset>\n	<input type="number" id="age"><br>\n	<select id="gender">\n		<option value="M">Male</option>\n		<option value="F">Female</option>\n	</select>\n	<div id="responsiveInput" class="col-xs6 colmd-4>\n		<label>ID Number: </label><input id="id">\n		<label>House Type: </label><input id="type">\n	</div>\n</form>';
+var data2 = 'นาย ก,74,เข้าเรียนครบ\nนาย ข,99,ขาด2ครั้ง\nนาย ค,5,สาย14ขาด1\nนางสาว ง,47,สายตลอด\nด.ญ. ฉ,100,ขาด1ครั้ง';
 var ans2 = "71.5\n87\n99.25\n0\n100";
 setData(data2, $('[data-question-id=2] .title'), ans2);
 
@@ -36,14 +37,14 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 	for(var i in dataStrings){
 		var findDiv = inputFieldTemplate.clone();
 		var replaceDiv = inputFieldTemplate.clone();
-		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
-		$(divElements[i]).append(replaceDiv.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
+		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keydown(function(){scrollTop = $('body').scrollTop();}).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
+		$(divElements[i]).append(replaceDiv.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keydown(function(){scrollTop = $('body').scrollTop();}).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
 	}
 }
 
 function getChangeFunction(i,find,replace,bindQuestionTitles,dataStrings,answerStrings){
 	return function(){
-		var result, string = dataStrings[i], matches = [], currPos = 0;;
+		var result, string = dataStrings[i], matches = [], currPos = 0;
 		while((result = string.match(new RegExp(find.children('input').val()))) && string.length > 0){
 			string = string.substring(result.index + Math.max(1, result[0].length));
 			matches.push({start: currPos + result.index, length: result[0].length});
@@ -126,5 +127,8 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 	$(afterElement).parent().parent().find('.choice-item[title=' + (isCorrect ? 'ถูก' : 'ผิด') + '] input').click();
 	if(isCorrect){
 		$(afterElement).parent().parent().find('input').prop('disabled', true).css('box-shadow','0px 0px 10px 10px rgba(0,255,0,0.3) inset');
+	}
+	for(var i=0;i<1000;i++){
+	setTimeout(function(){if(scrollTop >= 0) $('body').scrollTop(scrollTop);}, i);
 	}
 }
