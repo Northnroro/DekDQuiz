@@ -3,7 +3,7 @@ var finished = 0;
 var waitDelay = 1000;
 $('.question-title>.title').each(function(){
 	$(this).css("margin","0px");
-	$(this).parent().append($('<br><input id="'+$(this).find('span')[0].id+'t" style="margin-left:20px;border-color: orange;width:75%;" type="text" placeholder="โปรดพิมพ์เนื้อร้อง..." maxlength="40"></input><input type="button" style="margin-left:4px;background: #ffab57;border-color: #f37a01;" value="เช็ค!"></input><br><br><span id="'+$(this).find('span')[0].id+'r"> (ยังไม่ได้ใส่เนื้อ)</span><br><input id="'+$(this).find('span')[0].id+'b" type="button" style="margin-left:40px;display:none;" value="นึกไม่ออก เฉลยที!"></input><br><br>'));
+	$(this).parent().append($('<br><input id="'+'q'+$(this).parent().parent().data('question-id')+'t" style="margin-left:20px;border-color: orange;width:75%;" type="text" placeholder="โปรดพิมพ์เนื้อร้อง..." maxlength="40"></input><input type="button" style="margin-left:4px;background: #ffab57;border-color: #f37a01;" value="เช็ค!"></input><br><br><span id="'+'q'+$(this).parent().parent().data('question-id')+'r"> (ยังไม่ได้ใส่เนื้อ)</span><br><input id="'+'q'+$(this).parent().parent().data('question-id')+'b" type="button" style="margin-left:40px;display:none;" value="นึกไม่ออก เฉลยที!"></input><br><br>'));
 	var btnt;
 	var btnf;
 	$(this).parent().parent().find(".choice-item").find("input").each(function() {
@@ -14,11 +14,11 @@ $('.question-title>.title').each(function(){
 			btnf.click();
 		}
 	});
-	var word = $($(this).find('span')[0]).text().match(/".+"/)[0];
+	var word = $(this).text().match(/".+"/)[0];
 	word = word.substring(1,word.length-1);
-	var resultspan = $("#"+$(this).find('span')[0].id+"r");
-	var lyricsinput = $('#'+$(this).find('span')[0].id+'t');
-	var guessbtn = $('#'+$(this).find('span')[0].id+'b');
+	var resultspan = $("#"+'q'+$(this).parent().parent().data('question-id')+"r");
+	var lyricsinput = $('#'+'q'+$(this).parent().parent().data('question-id')+'t');
+	var guessbtn = $('#'+'q'+$(this).parent().parent().data('question-id')+'b');
 	lyricsinput.change(function() {
 		var thist = $(this);
 		var longestHint = "";
@@ -247,7 +247,7 @@ $('.question-title>.title').each(function(){
 			resultspan.html("<span> (ยังไม่ได้ใส่เนื้อ)</span>");
 		}
 	});
-	$('#'+$(this).find('span')[0].id+'b').click(function() {
+	$('#'+'q'+$(this).parent().parent().data('question-id')+'b').click(function() {
 		// $.ajax({
 		// 	url:"https://api.parse.com/1/functions/getRandomLyrics",
 		// 	type:"POST",
