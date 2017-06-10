@@ -116,7 +116,7 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 		padding: '0px 5px',
     	'margin-left': '5px'
 	})).css({
-		    margin: '0px -3px'
+		    margin: '8px -3px'
 	}));
 	$(afterElement).after(dataCodeBox = codeBoxTemplate.clone().html(hilightedData).prepend($('<legend>Input</legend>').css({
 		padding: '0px 5px',
