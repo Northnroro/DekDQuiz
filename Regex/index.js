@@ -45,7 +45,7 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 function getChangeFunction(i,find,replace,bindQuestionTitles,dataStrings,answerStrings){
 	return function(){
 		var result, string = dataStrings[i], matches = [], currPos = 0;
-		while((result = string.match(new RegExp(find.children('input').val()))) && string.length > 0){
+		while((result = string.match(new RegExp(find.children('input').val(),"m"))) && string.length > 0){
 			string = string.substring(result.index + Math.max(1, result[0].length));
 			matches.push({start: currPos + result.index, length: result[0].length});
 			currPos += result.index + Math.max(1, result[0].length);
@@ -87,7 +87,7 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 				background: 'rgb(217, 245, 166)',
 			    'box-shadow': 'rgb(139, 195, 33) 0px 0px 0px 1px',
 			    'border-radius': '3px'
-			}).html(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex), eval('\"' + replaceRegex + '\"')).replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+			}).html(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex,"m"), eval('\"' + replaceRegex + '\"')).replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
 			   return '&#'+i.charCodeAt(0)+';';
 			}))).html();
 			currPos = hilight[i].start + hilight[i].length;
