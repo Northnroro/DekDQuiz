@@ -15,7 +15,7 @@ var ans3 = "1-1041-42101-55-7\n1-1028-45211-04-2\n3-1029-45247-99-4\n1-7404-8453
 setData(data3, $('[data-question-id=3] .title'), ans3);
 
 var data4 = 'public static enum Color{\n\tGREEN,\n\tBLUE,\n\tRED,\n\tYELLOW,\n\tBLACK,\n\tWHITE,\n\tORANGE,\n\tPINK;\n\tString name, code;\n\tColor(String name, String code){}\n}';
-var ans4 = 'public static enum Color{\n\tGREEN("GREEN", "GRE"),\n\tBLUE("BLUE", "BLU"),\n\tRED("RED", "RED"),\n\tYELLOW("YELLOW", "YEL"),\n\tBLACK("BLACK", "BLA"),\n\tWHITE("WHITE", "WHI"),\n\tORANGE("orange", "ORA"),\n\tPINK("pink", "PIN");\n\tString name, code;\n\tColor(String name, String code){}\n}';
+var ans4 = 'public static enum Color{\n\tGREEN("GREEN", "GRE"),\n\tBLUE("BLUE", "BLU"),\n\tRED("RED", "RED"),\n\tYELLOW("YELLOW", "YEL"),\n\tBLACK("BLACK", "BLA"),\n\tWHITE("WHITE", "WHI"),\n\tORANGE("ORANGE", "ORA"),\n\tPINK("PINK", "PIN");\n\tString name, code;\n\tColor(String name, String code){}\n}';
 setData(data4, $('[data-question-id=4] .title'), ans4);
 
 var data5 = "11123345667\n12345\nabcdddeffgggggg\n1001110101101101110001\ncoffee spoon google\nอารยธรรม กรรมการ สรรหา\nกินน้ำแข็ง เย็นนนจังเลยยยจ้าา~~~!";
