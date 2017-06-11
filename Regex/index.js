@@ -126,9 +126,9 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 	var isCorrect = resultCodeBox.clone().children('legend').remove().end().text() == answerCodeBox.clone().children('legend').remove().end().text();
 	$(afterElement).parent().parent().find('.choice-item[title=' + (isCorrect ? 'ถูก' : 'ผิด') + '] input').click();
 	if(isCorrect){
-		$(afterElement).parent().parent().find('input').prop('disabled', true).css('box-shadow','0px 0px 10px 10px rgba(0,255,0,0.3) inset');
+		$(afterElement).parent().parent().find('input:not([type])').prop('disabled', true).css('box-shadow','0px 0px 10px 10px rgba(0,255,0,0.3) inset');
 	}
 	for(var i=0;i<1000;i++){
-	setTimeout(function(){if(scrollTop >= 0) $('body').scrollTop(scrollTop);}, i);
+		setTimeout(function(){if(scrollTop >= 0) $('body').scrollTop(scrollTop);}, i);
 	}
 }
