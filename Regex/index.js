@@ -14,8 +14,8 @@ var data3 = "1104142101557\n1102845211042\n3102945247994\n1740484532117\n1103278
 var ans3 = "1-1041-42101-55-7\n1-1028-45211-04-2\n3-1029-45247-99-4\n1-7404-84532-11-7\n1-1032-78214-35-1\n1-1048-78554-12-4\n1-1318-40780-55-2\n1-1033-05478-74-1";
 setData(data3, $('[data-question-id=3] .title'), ans3);
 
-var data4 = 'public static enum Color{\n\tgreen\n\tblue\n\tred\n\tyellow\n\tblack\n\twhite\n\torange\n\tpink\n\tString name, code;\n\tColor(String name, String code){}\n}';
-var ans4 = 'public static enum Color{\n\tGREEN("green", "GRE"),\n\tBLUE("blue", "BLU"),\n\tRED("red", "RED"),\n\tYELLOW("yellow", "YEL"),\n\tBLACK("black", "BLA"),\n\tWHITE("white", "WHI"),\n\tORANGE("orange", "ORA"),\n\tPINK("pink", "PIN");\n\tString name, code;\n\tColor(String name, String code){}\n}';
+var data4 = 'public static enum Color{\n\tGREEN\n\tBLUE\n\tRED\n\tYELLOW\n\tBLACK\n\tWHITE\n\tORANGE\n\tPINK\n\tString name, code;\n\tColor(String name, String code){}\n}';
+var ans4 = 'public static enum Color{\n\tGREEN("GREEN", "GRE"),\n\tBLUE("BLUE", "BLU"),\n\tRED("RED", "RED"),\n\tYELLOW("YELLOW", "YEL"),\n\tBLACK("BLACK", "BLA"),\n\tWHITE("WHITE", "WHI"),\n\tORANGE("orange", "ORA"),\n\tPINK("pink", "PIN");\n\tString name, code;\n\tColor(String name, String code){}\n}';
 setData(data4, $('[data-question-id=4] .title'), ans4);
 
 var data5 = "11123345667\n12345\nabcdddeffgggggg\n1001110101101101110001\ncoffee spoon google\nอารยธรรม กรรมการ สรรหา\nกินน้ำแข็ง เย็นนนจังเลยยยจ้าา~~~!";
