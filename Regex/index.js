@@ -87,7 +87,7 @@ function setData(data, afterElement, answer, hilight, findRegex, replaceRegex) {
 				background: 'rgb(217, 245, 166)',
 			    'box-shadow': 'rgb(139, 195, 33) 0px 0px 0px 1px',
 			    'border-radius': '3px'
-			}).html(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex,"m"), eval('\"' + replaceRegex + '\"')).replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+			}).html(data.substring(hilight[i].start, hilight[i].start + hilight[i].length).replace(new RegExp(findRegex,"m"), eval('\"' + replaceRegex.replace(/\"/gm, "\\\"") + '\"')).replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
 			   return '&#'+i.charCodeAt(0)+';';
 			}))).html();
 			currPos = hilight[i].start + hilight[i].length;
