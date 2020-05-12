@@ -37,9 +37,10 @@ function initInputField(divElements, bindQuestionTitles, dataStrings, answerStri
 	for(var i in dataStrings){
 		var findDiv = inputFieldTemplate.clone();
 		var replaceDiv = inputFieldTemplate.clone();
-		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keydown(function(){
-		scrollTop = $(divElements[i]).closest('.question-box').offset().top;}).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
-		$(divElements[i]).append(replaceDiv.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keydown(function(){scrollTop = $(divElements[i]).closest('.question-box').offset().top;}).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
+		$(divElements[i]).append(findDiv.prepend($('<label>').text("Find RegExp: ").css({width: '17%', display: 'inline-block'})).keydown((function(){
+		return function(e){scrollTop = $(e).closest('.question-box').offset().top;}})(divElements[i])).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
+		$(divElements[i]).append(replaceDiv.prepend($('<label>').text("Replace With: ").css({width: '17%', display: 'inline-block'})).keydown((function(){
+		return function(e){scrollTop = $(e).closest('.question-box').offset().top;}})(divElements[i])).keyup(getChangeFunction(i,$(findDiv),$(replaceDiv),bindQuestionTitles,dataStrings,answerStrings)));
 	}
 }
 
